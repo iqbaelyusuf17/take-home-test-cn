@@ -16,13 +16,13 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/call-monitoring")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class CallMonitoringController {
 
     private final CallMonitoringService callMonitoringService;
 
-    @GetMapping
+    @GetMapping("/call-monitoring")
     public ResponseEntity<WebResponse<List<CallMonitoringResponse>>> getCallMonitorings(
             @ModelAttribute CallMonitoringFilterRequest request
     ) {
