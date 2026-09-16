@@ -92,6 +92,8 @@ public class CallMonitoringRepositoryImpl extends AbstractJdbcRepository impleme
         return queryFrom;
     }
 
+
+
     @Override
     public PagingResult<CallMonitoring> findWithPaging(
             CallMonitoringFilterRequest request,
@@ -102,6 +104,6 @@ public class CallMonitoringRepositoryImpl extends AbstractJdbcRepository impleme
     ) {
         MapSqlParameterSource params = new MapSqlParameterSource();
         StringBuilder queryFrom = buildQueryFrom(request, params);
-        return executePagingResult(SELECT_COLUMNS, queryFrom, params, page, limit, sortColumn, sortDirection, ROW_MAPPER);
+        return executePagingResult("COUNT(*) ", SELECT_COLUMNS, queryFrom, params, page, limit, sortColumn, sortDirection, ROW_MAPPER);
     }
 }

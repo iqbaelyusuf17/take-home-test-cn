@@ -78,7 +78,24 @@ public abstract class AbstractJdbcRepository {
             String sortDirection,
             RowMapper<T> rowMapper
     ) {
-        long total = executeCount(queryFrom, params);
+        return executePagingResult("COUNT(*)", selectColumns, queryFrom, params, page, limit, sortColumn, sortDirection, rowMapper);
+    }
+
+    /**
+     * Mengeksekusi query count kustom (misal COUNT(DISTINCT cm.call_id)) dan Paging Data secara terpadu.
+     */
+    protected <T> PagingResult<T> executePagingResult(
+            String countExpression,
+            String selectColumns,
+            CharSequence queryFrom,
+            MapSqlParameterSource params,
+            int page,
+            int limit,
+            String sortColumn,
+            String sortDirection,
+            RowMapper<T> rowMapper
+    ) {
+        long total = executeCount(countExpression, queryFrom, params);
         if (total == 0) {
             return new PagingResult<>(Collections.emptyList(), 0L);
         }
