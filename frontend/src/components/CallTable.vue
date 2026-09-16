@@ -16,7 +16,7 @@
               </div>
             </th>
 
-            <!-- 3. Call Timestamp (Clickable Sort - AC-10) -->
+            <!-- 2. Call Timestamp (Clickable Sort - AC-10) -->
             <th
               scope="col"
               @click="$emit('sort', 'call_timestamp')"
@@ -28,7 +28,7 @@
               </div>
             </th>
 
-            <!-- 4. CS Name (Clickable Sort - AC-10) -->
+            <!-- 3. CS Name (Clickable Sort - AC-10) -->
             <th
               scope="col"
               @click="$emit('sort', 'cs_name')"
@@ -40,26 +40,26 @@
               </div>
             </th>
 
-            <!-- 5. Nama Nasabah (Clickable Sort - AC-10) -->
+            <!-- 4. Customer Name (Clickable Sort - AC-10) -->
             <th
               scope="col"
               @click="$emit('sort', 'customer_name')"
               class="px-4 py-3.5 cursor-pointer hover:bg-slate-100 select-none transition-colors"
             >
               <div class="flex items-center space-x-1">
-                <span>Nama Nasabah</span>
+                <span>Customer Name</span>
                 <component :is="getSortIcon('customer_name')" class="w-3.5 h-3.5" :class="getSortIconColor('customer_name')" />
               </div>
             </th>
 
-            <!-- 6. Sentiment Score Nasabah (Clickable Sort - AC-10) -->
+            <!-- 5. Customer Sentiment Score (Clickable Sort - AC-10) -->
             <th
               scope="col"
               @click="$emit('sort', 'sentiment_score')"
               class="px-4 py-3.5 text-right cursor-pointer hover:bg-slate-100 select-none transition-colors"
             >
               <div class="flex items-center justify-end space-x-1">
-                <span>Sentiment Score Nasabah</span>
+                <span>Sentiment Score</span>
                 <component :is="getSortIcon('sentiment_score')" class="w-3.5 h-3.5" :class="getSortIconColor('sentiment_score')" />
               </div>
             </th>
@@ -77,22 +77,22 @@
               {{ row.call_id }}
             </td>
 
-            <!-- 3. Call Timestamp (Formatted WIB) -->
+            <!-- 2. Call Timestamp (Formatted) -->
             <td class="px-4 py-3.5 text-slate-600 whitespace-nowrap">
               {{ formatCallTimestamp(row.call_timestamp) }}
             </td>
 
-            <!-- 4. CS Name -->
+            <!-- 3. CS Name -->
             <td class="px-4 py-3.5 font-medium text-slate-800">
               {{ row.cs_name || '-' }}
             </td>
 
-            <!-- 5. Nama Nasabah -->
+            <!-- 4. Customer Name -->
             <td class="px-4 py-3.5 font-medium text-slate-900">
               {{ row.customer_name || '-' }}
             </td>
 
-            <!-- 6. Sentiment Score Nasabah -->
+            <!-- 5. Sentiment Score -->
             <td class="px-4 py-3.5 text-right font-semibold">
               <span
                 v-if="row.sentiment_score !== null && row.sentiment_score !== undefined"

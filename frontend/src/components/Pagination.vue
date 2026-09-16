@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-2">
-    <!-- Total Records Count Saja -->
+    <!-- Total Records Count Only -->
     <div class="text-xs text-slate-500 font-medium order-2 sm:order-1">
-      Total: <span class="font-bold text-slate-800">{{ meta.total_records }}</span> data panggilan
+      Total: <span class="font-bold text-slate-800">{{ meta.total_records }}</span> call records
     </div>
 
-    <!-- Tombol Navigasi Paginasi (AC-3, AC-11) -->
+    <!-- Pagination Navigation Buttons (AC-3, AC-11) -->
     <div class="inline-flex items-center space-x-2 order-1 sm:order-2">
-      <!-- Tombol Sebelumnya (Previous) -->
+      <!-- Previous Button -->
       <button
         @click="$emit('change-page', meta.page - 1)"
         :disabled="!meta.has_previous"
@@ -19,10 +19,10 @@
         "
       >
         <ChevronLeft class="w-4 h-4 mr-1" />
-        Sebelumnya
+        Previous
       </button>
 
-      <!-- Tombol Selanjutnya (Next) -->
+      <!-- Next Button -->
       <button
         @click="$emit('change-page', meta.page + 1)"
         :disabled="!meta.has_next"
@@ -33,7 +33,7 @@
             : 'bg-slate-100 border-slate-200 text-slate-400 cursor-not-allowed'
         "
       >
-        Selanjutnya
+        Next
         <ChevronRight class="w-4 h-4 ml-1" />
       </button>
     </div>

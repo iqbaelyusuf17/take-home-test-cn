@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
       <div class="flex items-center space-x-2">
         <Filter class="w-4 h-4 text-blue-600" />
-        <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wider">Filter & Pencarian Panggilan</h2>
+        <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wider">Call Filters & Search</h2>
       </div>
       <button
         v-if="hasActiveFilters"
@@ -11,29 +11,29 @@
         class="inline-flex items-center text-xs font-semibold text-rose-600 hover:text-rose-700 transition-colors"
       >
         <RotateCcw class="w-3.5 h-3.5 mr-1" />
-        Reset Filter
+        Reset Filters
       </button>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <!-- 1. Pencarian Kata Kunci (AC-4) -->
+      <!-- 1. Search Keyword (AC-4) -->
       <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Kata Kunci Pencarian</label>
+        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Search Keyword</label>
         <div class="relative">
           <Search class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             v-model="localFilters.search"
             @input="onFilterChange"
-            placeholder="Cari ID, CS, atau Nasabah..."
+            placeholder="Search by ID, CS, or Customer..."
             class="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white placeholder-slate-400 transition"
           />
         </div>
       </div>
 
-      <!-- 2. Periode Awal (AC-5, AC-6: Batas 3 bulan) -->
+      <!-- 2. Start Period (AC-5, AC-6: latest 3 months limit) -->
       <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Periode Awal</label>
+        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Start Period</label>
         <div class="relative">
           <Calendar class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
@@ -47,9 +47,9 @@
         </div>
       </div>
 
-      <!-- 3. Periode Akhir (AC-5, AC-6: Batas 3 bulan) -->
+      <!-- 3. End Period (AC-5, AC-6: latest 3 months limit) -->
       <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Periode Akhir</label>
+        <label class="block text-xs font-semibold text-slate-700 mb-1.5">End Period</label>
         <div class="relative">
           <Calendar class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
@@ -63,17 +63,17 @@
         </div>
       </div>
 
-      <!-- 4. Filter Sentimen (AC-7, AC-8) -->
+      <!-- 4. Customer Sentiment Filter (AC-7, AC-8) -->
       <div>
-        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Sentimen Nasabah</label>
+        <label class="block text-xs font-semibold text-slate-700 mb-1.5">Customer Sentiment</label>
         <select
           v-model="localFilters.sentiment"
           @change="onFilterChange"
           class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-slate-700 transition cursor-pointer"
         >
-          <option value="ALL">Semua Sentimen</option>
-          <option value="UNDER_70">Di bawah 70% (&lt; 70%)</option>
-          <option value="70_AND_ABOVE">70% atau lebih (&ge; 70%)</option>
+          <option value="ALL">All Sentiments</option>
+          <option value="UNDER_70">Under 70% (&lt; 70%)</option>
+          <option value="70_AND_ABOVE">70% or more (&ge; 70%)</option>
         </select>
       </div>
     </div>
@@ -87,7 +87,7 @@ import { getThreeMonthsAgoDateString, getTodayDateString } from '../utils/dateFo
 
 const emit = defineEmits(['filter-change', 'reset'])
 
-// Batas rentang 3 bulan terakhir (AC-6)
+// Limit date range to latest 3 months (AC-6)
 const minDate = getThreeMonthsAgoDateString()
 const maxDate = getTodayDateString()
 
