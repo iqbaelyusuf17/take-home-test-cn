@@ -29,8 +29,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.iqbal.callmonitoring.config.ApiLoggingFilter;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+
 @WebMvcTest(controllers = CallMonitoringController.class)
-@Import(GlobalExceptionHandler.class)
+@Import({GlobalExceptionHandler.class, ApiLoggingFilter.class})
 class CallMonitoringControllerTest {
 
     @Autowired
@@ -67,6 +70,7 @@ class CallMonitoringControllerTest {
                         .param("limit", "5")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+                .andExpect(header().exists("X-Trace-Id"))
                 .andExpect(jsonPath("$.code", is(200)))
                 .andExpect(jsonPath("$.message", is("Success")))
                 .andExpect(jsonPath("$.data", hasSize(1)))
@@ -91,6 +95,7 @@ class CallMonitoringControllerTest {
                         .param("endDate", "2026-06-01")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
+                .andExpect(header().exists("X-Trace-Id"))
                 .andExpect(jsonPath("$.code", is(400)))
                 .andExpect(jsonPath("$.message", is("Period range cannot exceed 3 months")));
     }

@@ -17,6 +17,8 @@ spring:
       connection-timeout: 20000
 
 logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [traceId=%X{traceId:-}] %-5level %logger{36} - %msg%n"
   level:
     root: INFO
-    com.bank.callmonitoring: DEBUG
+    com.iqbal.callmonitoring: DEBUG
